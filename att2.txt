@@ -1,0 +1,20 @@
+const int pinRx = 2; 
+char byteInArrivo = 0; 
+char byteRicevuto[8]; 
+int bitIndex = 0; 
+void setup() {
+  Serial.begin(1200); 
+  pinMode(pinRx, INPUT); 
+}
+ 
+void loop() {
+  byteInArrivo = 0; 
+  bitIndex = 0; 
+  while (digitalRead(pinRx) == HIGH) {}
+  delayMicroseconds(520);
+  while (bitIndex < 8) {
+    byteInArrivo |= (digitalRead(pinRx) << bitIndex);
+    bitIndex++;
+    delayMicroseconds(1040); 
+  Serial.write(byteInArrivo);
+}
